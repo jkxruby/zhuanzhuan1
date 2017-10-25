@@ -15,13 +15,13 @@ def get_category_urls(start_url):
 
 get_category_urls(start_url)
 
-category_links_list = '''
+category_url_list = '''
 
 bj.ganji.com/shouji/
 bj.ganji.com/shoujipeijian/
 bj.ganji.com/bijibendiannao/
 bj.ganji.com/taishidiannaozhengji/
-bj.ganji.com/diannaoyingjian/
+bj.ganji.com/diannaoyingjia
 bj.ganji.com/wangluoshebei/
 bj.ganji.com/shumaxiangji/
 bj.ganji.com/youxiji/
