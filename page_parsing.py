@@ -34,13 +34,16 @@ def get_item_urls_from(category, pages):
 def get_item_info(url):
     url = 'http://zhuanzhuan.ganji.com/detail/923140825311903756z.shtml' # 列举一个
     wb_data = requests.get(url)
-    soup = BeautifulSoup(wb_data.text, 'lxml')
-    title = soup.title.text
-    price = soup.select('span.price_now i')[0].text
-    area = soup.select('.palce_li i')[0].text
+    if wb_data.status_code == 404:  # status_code 是requests 自带的一个方法，在一开始的时候检测网页是否有效存在
+        pass
+    else:
+        soup = BeautifulSoup(wb_data.text, 'lxml')
+        title = soup.title.text
+        price = soup.select('span.price_now i')[0].text
+        area = soup.select('.palce_li i')[0].text
 
-    item_info.insert_one({ 'title':title, 'price':price, 'area':area })
-    print(title,price,area)
+        item_info.insert_one({ 'title':title, 'price':price, 'area':area })
+        print(title,price,area)
 #get_item_info('http://zhuanzhuan.ganji.com/detail/923140825311903756z.shtml')
 
 
