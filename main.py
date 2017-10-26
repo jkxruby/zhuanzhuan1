@@ -21,9 +21,11 @@ def get_all_urls_from(category):
 
 if __name__=='__main__':
     pool = Pool(processes= 4)
-    pool.map(get_all_urls_from, category_url_list.split())  # split()会将长字符串变成一个 列表，map直接从列表里依次拿元素
+    result1 = pool.map(get_all_urls_from, category_url_list.split())  # split()会将长字符串变成一个 列表，map直接从列表里依次拿元素
     pool.close()
     pool.join()
+    if result1.successful():
+        print('result1 successful')
 
 #================获取所有商品的详情=================#
 
@@ -31,10 +33,12 @@ def get_all_item_info(url):
     for i in rest_of_urls:
         get_item_info(i)
 
-if __name__=='__main__':
     pool = Pool(processes= 4)
-    pool.map( get_all_item_info,  rest_of_urls )
+    result2 = pool.map( get_all_item_info,  rest_of_urls )
     pool.close()
     pool.join()
+    if result2.successful():
+        print('result2 successful')
+
 
 
