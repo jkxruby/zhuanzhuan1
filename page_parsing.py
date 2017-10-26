@@ -22,16 +22,16 @@ def get_item_urls_from(category, pages):
     if soup.find('td','t'):
         for i in part_item_url:
             item_url = i.get('href').split('?')[0]
-            #item_url_list.insert_one( {'url':item_url} )
-            #print(item_url)
+            item_url_list.insert_one( {'url':item_url} )
+            print(item_url)
         else:
             pass  # 通过这个判断式来判断爬取翻页到头时自动停止，td t 是商品的标题元素，没它就证明该页面没商品了
 
-#get_item_urls_from('http://bj.ganji.com/shouji/',30)
+#get_item_urls_from('http://bj.ganji.com/shouji/',1)
 
 
 #=========获取一个商品的详情=========#
-def get_item_info(url,):
+def get_item_info(url):
     url = 'http://zhuanzhuan.ganji.com/detail/923140825311903756z.shtml' # 列举一个
     wb_data = requests.get(url)
     soup = BeautifulSoup(wb_data.text, 'lxml')
@@ -40,9 +40,7 @@ def get_item_info(url,):
     area = soup.select('.palce_li i')[0].text
 
     item_info.insert_one({ 'title':title, 'price':price, 'area':area })
-
-    #print(title,price,area)
-
-get_item_info('http://zhuanzhuan.ganji.com/detail/923140825311903756z.shtml')
+    print(title,price,area)
+#get_item_info('http://zhuanzhuan.ganji.com/detail/923140825311903756z.shtml')
 
 
