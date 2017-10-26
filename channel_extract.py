@@ -10,42 +10,41 @@ def get_category_urls(start_url):
     part_category_urls = soup.select('div.main-pop dt a')  # 此变量生成一个字典的集合，无法使用的，当我们通过for in 时，会调出单独的字典，再使用字典函数get()等等
 
     for part_category_url in part_category_urls:
-        category_url =  start_url.split('/')[2] + str(part_category_url.get('href'))
+        category_url =  'http://' + start_url.split('/')[2] + str(part_category_url.get('href'))
         print(category_url)
 
-get_category_urls(start_url)
+#get_category_urls(start_url)
 
 category_url_list = '''
-
-bj.ganji.com/shouji/
-bj.ganji.com/shoujipeijian/
-bj.ganji.com/bijibendiannao/
-bj.ganji.com/taishidiannaozhengji/
-bj.ganji.com/diannaoyingjia
-bj.ganji.com/wangluoshebei/
-bj.ganji.com/shumaxiangji/
-bj.ganji.com/youxiji/
-bj.ganji.com/xuniwupin/
-bj.ganji.com/jiaju/
-bj.ganji.com/jiadian/
-bj.ganji.com/zixingchemaimai/
-bj.ganji.com/rirongbaihuo/
-bj.ganji.com/yingyouyunfu/
-bj.ganji.com/fushixiaobaxuemao/
-bj.ganji.com/meironghuazhuang/
-bj.ganji.com/yundongqicai/
-bj.ganji.com/yueqi/
-bj.ganji.com/tushu/
-bj.ganji.com/bangongjiaju/
-bj.ganji.com/wujingongju/
-bj.ganji.com/nongyongpin/
-bj.ganji.com/xianzhilipin/
-bj.ganji.com/shoucangpin/
-bj.ganji.com/baojianpin/
-bj.ganji.com/laonianyongpin/
-bj.ganji.com/gou/
-bj.ganji.com/qitaxiaochong/
-bj.ganji.com/xiaofeika/
-bj.ganji.com/menpiao/
+http://bj.ganji.com/shouji/
+http://bj.ganji.com/shoujipeijian/
+http://bj.ganji.com/bijibendiannao/
+http://bj.ganji.com/taishidiannaozhengji/
+http://bj.ganji.com/diannaoyingjian/
+http://bj.ganji.com/wangluoshebei/
+http://bj.ganji.com/shumaxiangji/
+http://bj.ganji.com/youxiji/
+http://bj.ganji.com/xuniwupin/
+http://bj.ganji.com/jiaju/
+http://bj.ganji.com/jiadian/
+http://bj.ganji.com/zixingchemaimai/
+http://bj.ganji.com/rirongbaihuo/
+http://bj.ganji.com/yingyouyunfu/
+http://bj.ganji.com/fushixiaobaxuemao/
+http://bj.ganji.com/meironghuazhuang/
+http://bj.ganji.com/yundongqicai/
+http://bj.ganji.com/yueqi/
+http://bj.ganji.com/tushu/
+http://bj.ganji.com/bangongjiaju/
+http://bj.ganji.com/wujingongju/
+http://bj.ganji.com/nongyongpin/
+http://bj.ganji.com/xianzhilipin/
+http://bj.ganji.com/shoucangpin/
+http://bj.ganji.com/baojianpin/
+http://bj.ganji.com/laonianyongpin/
+http://bj.ganji.com/gou/
+http://bj.ganji.com/qitaxiaochong/
+http://bj.ganji.com/xiaofeika/
+http://bj.ganji.com/menpiao/
 
 '''
