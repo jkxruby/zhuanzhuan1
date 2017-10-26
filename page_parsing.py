@@ -15,10 +15,13 @@ def get_item_urls_from(category, pages):
     category_url = '{}o{}/'.format(category, str(pages))
     wb_data = requests.get(category_url)
     soup = BeautifulSoup(wb_data.text, 'lxml')
-    part_item_url = soup.select('td.t a')
+    part_item_url1 = soup.select('tr.zzinfo.jz td.t a')  # 通过这3行代码，清除了链接中的商家商品，剩余均为个人商品
+    part_item_url2 = soup.select('td.t a')
+    part_item_url = list(set(part_item_url2) - set(part_item_url1))
+
     for i in part_item_url:
         item_url = i.get('href').split('?')[0]
-        item_url_list.insert_one( {'url':item_url} )
+        #item_url_list.insert_one( {'url':item_url} )
         print(item_url)
 
 get_item_urls_from('http://bj.ganji.com/shouji/',1)
