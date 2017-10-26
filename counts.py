@@ -6,3 +6,4 @@ while True:
     time.sleep(1)
     print(item_url_list.find().count())
     print(item_info.find().count())
+

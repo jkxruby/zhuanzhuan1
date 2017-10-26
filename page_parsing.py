@@ -38,12 +38,14 @@ def get_item_info(url):
         pass
     else:
         soup = BeautifulSoup(wb_data.text, 'lxml')
-        title = soup.title.text
-        price = soup.select('span.price_now i')[0].text
-        area = soup.select('.palce_li i')[0].text
-
-        item_info.insert_one({ 'title':title, 'price':price, 'area':area })
-        print(title,price,area)
+        data = {
+            'title': soup.title.text,
+            'price':soup.select('span.price_now i')[0].text,
+            'area':  soup.select('.palce_li i')[0].text,
+            'url': url
+        }
+        item_info.insert_one(data)
+        print(data)
 #get_item_info('http://zhuanzhuan.ganji.com/detail/923140825311903756z.shtml')
 
 
