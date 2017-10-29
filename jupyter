@@ -1,0 +1,32 @@
+# jupyter上的用于可视化代码，保存在万能的github上
+
+import pymongo  # 爬取二手手机电脑平板7日内的交易量变化，绘制曲线图
+import charts 
+from datetime import timedelta,date
+
+# 处理时间数据
+for i in item_info.find({'pub_date':'2016.01.14'}, {'area':{'$slice':1}, '_id':0, 'price':0, 'title':0} ).limit(200):
+    print(i)  # 这里的 find() 函数，前面的pub_date 被称为条件操作符，描述我们想要的时间，后面都是查询参数，0表示false,1表示true
+# 查询2个日期乃至更多的的写法
+# for i in item_info.find({'pub_date':{'$in':['2016.01.12, 2016.01.14']} }, {'area':{'$slice':1}, '_id':0, 'price':0, 'title':0} ).limit(200):
+# $in $slice均为常用操作，这里area必须加 slice,否则报错，原因是已存的数据中 area的value 是3段字符串组成的列表，而时间value则只是字符串，find无法读取area的格式
+
+#  输出时间范围
+for i in item_info.find().limit(10):        
+    frags = i['pub_date'].split('-')    # 分割会产生列表，这样就会生成一个切成3个元素的列表,如果不分割直接打印则对应字符串*
+    if len(frags) == 1:
+        date = frags[0]  # 原样输出
+    else:
+        date = '{}.{}.{}'.format(frags[0],frags[1],frags[2])     
+    print(date)
+    
+def get_all_dates(date1, date2):
+    the_date = date( int(date1.split('.')[0]), int(date1.split('.')[1]), int(date1.split('.')[2]) )
+    end_date = date( int(date2.split('.')[0]), int(date2.split('.')[1]), int(date2.split('.')[2]) )
+    days = timedelta(days = 1)  # 定义days表示一天
+    while the_date <= end_date:
+        yield( the_date.strftime('%Y.%m.%d') )   # yield 每执行一圈程序，存储一个值，所以它记录了整个过程，也就是每一天
+        the_date = the_date + days
+
+for i in get_all_dates('2016.1.14', '2016.1.17'):
+    print(i)
