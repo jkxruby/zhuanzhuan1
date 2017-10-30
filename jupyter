@@ -40,12 +40,12 @@ def get_data_within(date1,date2,cates):
             cate_day_posts.append( cate_day_post )
             #print('#'*20, date , cate, len(a), '#'*20)
         # 主体程序已完成，按照固定格式去调整数据，进行图示化展示
-    data = {
-        'name': cate,
-        'data': cate_day_posts,
-        'type': 'line'
-    }
-    yield data
+        data = {       # 这里得缩进2次，缩进一次只会显示一行结果
+            'name': cate,
+            'data': cate_day_posts,
+            'type': 'line'
+        }
+        yield data
     
 for i in get_data_within('2016.1.1', '2016.1.10', ['笔记本','家电','手机']):
 print(i)
