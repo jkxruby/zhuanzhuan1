@@ -27,6 +27,43 @@ def get_all_dates(date1, date2):
     while the_date <= end_date:
         yield( the_date.strftime('%Y.%m.%d') )   # yield 每执行一圈程序，存储一个值，所以它记录了整个过程，也就是每一天
         the_date = the_date + days
-
-for i in get_all_dates('2016.1.14', '2016.1.17'):
+# 测试一下函数是否正确
+for i in get_all_dates('2016.1.14', '2016.1.18'):
     print(i)
+    
+def get_data_within(date1,date2,cates):
+    for cate in cates:
+        cate_day_posts = []
+        for date in get_all_dates(date1,date2):
+            a = list(item_info.find({'pub_date':date, 'cates':cate}))   # 注意cates:cate，后面必须是cate才能计算数量，不然数量全是0
+            cate_day_post = len(a)
+            cate_day_posts.append( cate_day_post )
+            #print('#'*20, date , cate, len(a), '#'*20)
+        # 主体程序已完成，按照固定格式去调整数据，进行图示化展示
+    data = {
+        'name': cate,
+        'data': cate_day_posts,
+        'type': 'line'
+    }
+    yield data
+    
+for i in get_data_within('2016.1.1', '2016.1.10', ['笔记本','家电','手机']):
+print(i)
+
+options = {
+    'chart'   : {'zoomType':'xy'},
+    'title'   : {'text': '发帖量统计'},
+    'subtitle': {'text': '可视化统计图表'},
+    'xAxis'   : {'categories': [i for i in get_all_dates('2016.01.01','2016.01.07')]},
+    'yAxis'   : {'title': {'text': '数量'}}
+    }
+
+series = [i for i in get_data_within('2016.01.01','2016.01.07',['手机','笔记本','家电'])]
+
+charts.plot(series, options=options,show='inline')
+# options=dict(title=dict(text='Charts are AWESOME!!!'))
+
+
+    
+    
+ 
